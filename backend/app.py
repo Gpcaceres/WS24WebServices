@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)  # Permitir solicitudes desde el frontend
 
 # Configuración de MongoDB
-MONGO_URI = "mongodb+srv://oop:oop@cluster0.9knxc.mongodb.net/?appName=Cluster0"
+MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://oop:oop@cluster0.9knxc.mongodb.net/?appName=Cluster0")
 DATABASE_NAME = "oop"
 COLLECTION_NAME = "Customers"
 
