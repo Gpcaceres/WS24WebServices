@@ -23,6 +23,7 @@ except Exception as e:
 
 # Ruta principal
 @app.route('/')
+@app.route('/api')
 def home():
     return jsonify({
         "message": "API REST de Customers",
@@ -32,6 +33,7 @@ def home():
     })
 
 # Endpoint GET para obtener todos los clientes
+@app.route('/customers', methods=['GET'])
 @app.route('/api/customers', methods=['GET'])
 def get_customers():
     try:
@@ -54,7 +56,7 @@ def get_customers():
             "error": str(e)
         }), 500
 
-# Para Vercel
-def handler(request):
-    with app.request_context(request.environ):
-        return app.full_dispatch_request()
+# Manejador para Vercel (WSGI)
+if __name__ != '__main__':
+    # En producción (Vercel)
+    app = app
